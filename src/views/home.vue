@@ -7,7 +7,7 @@ import Footer from '../components/Footer.vue'
 <template>
 
     <header class="navbar">
-        <a href="index.html" class="logo">Evo<span>Car</span></a>
+        <a href="./home.vue" class="logo">Evo<span>Car</span></a>
         <nav>
             <a href="#hero">Início</a>
             <a href="#timeline">História</a>
@@ -58,29 +58,30 @@ import Footer from '../components/Footer.vue'
     </section>
 
     <!--  Luiz faz a parte da equipe / Navegação para páginas individuais -->
-      <section class="equipe" id="equipe">
+    <section class="equipe" id="equipe">
         <div class="container">
             <h2 class="titulo-secao">Escolha um <span>Capítulo</span></h2>
             <p class="subtitulo-secao">Cada integrante explora uma era diferente da história automotiva.</p>
 
             <div class="equipe-flex">
 
-                <a href="leo.html" class="equipe-card equipe-card-classico">
+                <router-link to="/classicos" class="equipe-card equipe-card-classico">
                     <div class="equipe-card-img" style="background: linear-gradient(135deg, #2c1810, #5c3020);">
                         <img src="../assets/img_leo/iniciodetudo.jpg" alt="Carros Clássicos">
                         <div class="equipe-overlay">
                             <span>Ver página →</span>
                         </div>
                     </div>
+
                     <div class="equipe-card-corpo">
                         <span class="tag tag-laranja">Era Clássica</span>
                         <h3>Carros Clássicos</h3>
                         <p>por Léo</p>
                         <p class="desc">A elegância e a história dos automóveis que marcaram época.</p>
                     </div>
-                </a>
+                </router-link>
 
-                <a href="luis.html" class="equipe-card equipe-card-destaque">
+                <router-link to="/esportivos" class="equipe-card equipe-card-destaque">
                     <div class="equipe-card-img" style="background: linear-gradient(135deg, #1a0a0a, #4a1010);">
                         <img src="../assets/img/Carros esportivos.jpg" alt="Carros Esportivos">
                         <div class="equipe-overlay">
@@ -93,9 +94,9 @@ import Footer from '../components/Footer.vue'
                         <p>por Ligeiro</p>
                         <p class="desc">Potência, adrenalina e as máquinas que desafiam os limites.</p>
                     </div>
-                </a>
+                </router-link>
 
-                <a href="joao.html" class="equipe-card">
+                <router-link to="/Luxo" class="equipe-card">
                     <div class="equipe-card-img" style="background: linear-gradient(135deg, #1a1500, #4a3d00);">
                         <img src="../assets/img_luxo/img_capa_index.webp" alt="Carros de Luxo">
                         <div class="equipe-overlay">
@@ -108,12 +109,12 @@ import Footer from '../components/Footer.vue'
                         <p>por João</p>
                         <p class="desc">Sofisticação e prestígio na mais alta expressão automotiva.</p>
                     </div>
-                </a>
+                </router-link>
 
             </div>
         </div>
     </section>
-      
+
 
 
 
