@@ -1,5 +1,5 @@
 <script>
-
+import '../assets/css/joao.css'
 </script>
 
 
@@ -8,9 +8,9 @@
     <body>
         <!--NAVBAR-->
         <header class="navbar">
-            <a href="./home.vue" class="logo">Evo<span>Car</span></a>
+            <router-link to="/" class="logo">Evo<span>Car</span></router-link>
             <nav>
-                <a href="./home.vue">← Início</a>
+                <router-link to="/">← Início</router-link>
                 <a href="#hero">Sobre</a>
                 <a href="#galeria">Galeria</a>
                 <a href="#contato">Contato</a>
@@ -165,15 +165,15 @@
             <div class="container">
                 <div class="footer-colunas">
                     <div>
-                        <a href="index.html" class="logo">Evo<span>Car</span></a>
+                        <router-link to="/" class="logo">Evo<span>Car</span></router-link>
                         <p>Página de João — Carros de Luxo.</p>
                     </div>
                     <div>
                         <h4>Outras Páginas</h4>
                         <ul>
-                            <li><a href="index.html">← Início</a></li>
-                            <li><a href="leo.html">Clássicos — Léo</a></li>
-                            <li><a href="ligeiro.html">Esportivos — Ligeiro</a></li>
+                            <li><router-link to="/">← Início</router-link></li>
+                            <li><router-link to="/classicos">Clássicos — Léo</router-link></li>
+                            <li><router-link to="/esportivos">Esportivos — Ligeiro</router-link></li>
                         </ul>
                     </div>
                 </div>

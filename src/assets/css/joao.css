@@ -1,5 +1,5 @@
 .hero-luxo {
-  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.95)), url('img_luxo/capa_fundo_luxo.avif');
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.95)), url('../img_luxo/capa_fundo_luxo.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

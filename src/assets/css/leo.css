@@ -37,7 +37,7 @@ body {
 /* ---------- HERO CLÁSSICO ---------- */
 .hero-classico {
     background: linear-gradient(135deg, rgba(28,16,8,.85) 0%, rgba(61,31,8,.75) 50%, rgba(28,16,8,.85) 100%),
-                url('img_leo/primeiro-carro.jpeg') center/cover no-repeat;
+                url('../img_leo/primeiro-carro.jpeg') center/cover no-repeat;
     position: relative;
 }
 

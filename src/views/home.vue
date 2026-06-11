@@ -1,6 +1,7 @@
 <script setup>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
+import '../assets/css/style.css'
 </script>
 
 
@@ -96,7 +97,7 @@ import Footer from '../components/Footer.vue'
                     </div>
                 </router-link>
 
-                <router-link to="/Luxo" class="equipe-card">
+                <router-link to="/luxo" class="equipe-card">
                     <div class="equipe-card-img" style="background: linear-gradient(135deg, #1a1500, #4a3d00);">
                         <img src="../assets/img_luxo/img_capa_index.webp" alt="Carros de Luxo">
                         <div class="equipe-overlay">
