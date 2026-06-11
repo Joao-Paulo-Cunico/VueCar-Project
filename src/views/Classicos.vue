@@ -13,14 +13,35 @@ const items = [
 export default {
     components: { Header, Footer, Gallery },
     data() {
-        return { items }
+        return {
+            items,
+            // Estrutura do formulário de contato
+            form: { nome: '', email: '', carro: '', mensagem: '', newsletter: false },
+            formErrors: {},
+            submitted: false
+        }
+    },
+    methods: {
+        // Valida e processa o envio do formulário
+        submitForm(e) {
+            e.preventDefault()
+            this.formErrors = {}
+            if (!this.form.nome) this.formErrors.nome = 'Nome é obrigatório.'
+            if (!this.form.email) this.formErrors.email = 'Email é obrigatório.'
+            if (!this.form.mensagem) this.formErrors.mensagem = 'Mensagem é obrigatória.'
+            if (Object.keys(this.formErrors).length === 0) {
+                this.submitted = true
+                this.form = { nome: '', email: '', carro: '', mensagem: '', newsletter: false }
+                setTimeout(() => (this.submitted = false), 4000)
+            }
+        }
     }
 }
 </script>
 
 <template>
 
-    <!-- Usamos o componente Header para manter layout consistente -->
+
     <Header />
 
     <section class="hero hero-classico" id="hero">
@@ -185,12 +206,60 @@ export default {
         </div>
     </section>
 
+    <!-- Galeria reutilizável com busca/filtro -->
+    <Gallery :items="items" />
 
+    <!-- Formulário de contato (Léo) -->
+    <section class="contato" id="contato">
+        <div class="container">
+            <div class="contato-grid">
+                <div class="contato-info">
+                    <span class="tag">Contato</span>
+                    <h2 class="titulo-secao">Fale com <span>Léo</span></h2>
+                    <p>Apaixonado por clássicos? Compartilhe suas histórias conosco!</p>
+                    <ul class="contato-lista">
+                        <li>🏎️ Tema: Carros Clássicos</li>
+                        <li>👤 Responsável: Léo</li>
+                        <li>📚 Engenharia de Software — 3° Período</li>
+                    </ul>
+                </div>
+                <form class="form" @submit.prevent="submitForm">
+                    <div class="form-grupo">
+                        <label for="nome">Nome *</label>
+                        <input v-model="form.nome" type="text" id="nome" placeholder="Seu nome" />
+                        <div v-if="formErrors.nome" class="erro">{{ formErrors.nome }}</div>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="email">E-mail *</label>
+                        <input v-model="form.email" type="email" id="email" placeholder="seu@email.com" />
+                        <div v-if="formErrors.email" class="erro">{{ formErrors.email }}</div>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="carro-favorito">Carro Clássico Favorito</label>
+                        <select v-model="form.carro" id="carro-favorito">
+                            <option value="">Selecione...</option>
+                            <option value="fusca">VW Fusca</option>
+                            <option value="opala">Chevrolet Opala</option>
+                            <option value="maverick">Ford Maverick</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea v-model="form.mensagem" id="mensagem" rows="4" placeholder="Sua mensagem..."></textarea>
+                        <div v-if="formErrors.mensagem" class="erro">{{ formErrors.mensagem }}</div>
+                    </div>
+                    <div class="form-grupo form-check">
+                        <input v-model="form.newsletter" type="checkbox" id="newsletter" />
+                        <label for="newsletter">Quero receber novidades sobre clássicos</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Enviar</button>
+                    <div v-if="submitted" class="sucesso">Mensagem enviada com sucesso!</div>
+                </form>
+            </div>
+        </div>
+    </section>
 
-
-  <!-- Reaproveitamos o componente Gallery passando os itens via prop -->
-  <Gallery :items="items" />
-
-  <Footer />
+    <Footer />
 
 </template>

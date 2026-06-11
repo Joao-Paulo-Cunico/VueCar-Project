@@ -4,9 +4,6 @@ import Header from '../components/header.vue'
 import Footer from '../components/footer.vue'
 import Gallery from '../components/Gallery.vue'
 
-// Lista de itens da galeria como exemplo. Mantive este array localmente para
-// mostrar como o `Gallery` consome dados via `props`. Em produção, isso
-// pode vir de uma API ou de um store centralizado.
 const items = [
   { id: 1, title: 'Rolls-Royce Phantom', year: '1925', tag: 'Luxo', desc: 'Rolls-Royce Phantom', image: '/src/assets/img_luxo/img_luxo1.webp' },
   { id: 2, title: 'Bentley Continental GT', year: '2003', tag: 'GT', desc: 'Bentley Continental GT', image: '/src/assets/img_luxo/img_luxo2.jfif' },
@@ -18,16 +15,13 @@ export default {
   data() {
     return {
       items,
-      // Estrutura do formulário convertida para `v-model`:
-      // - mais fácil de validar e limpar após envio
       form: { nome: '', email: '', carro: '', mensagem: '', newsletter: false },
       formErrors: {},
       submitted: false
     }
   },
   methods: {
-    // submitForm: validação simples no cliente. Substitui o uso de `action`/`method`
-    // que antes causaria reload da página (não desejável em SPA).
+  
     submitForm(e) {
       e.preventDefault()
       this.formErrors = {}
@@ -35,7 +29,7 @@ export default {
       if (!this.form.email) this.formErrors.email = 'Email é obrigatório.'
       if (!this.form.mensagem) this.formErrors.mensagem = 'Mensagem é obrigatória.'
       if (Object.keys(this.formErrors).length === 0) {
-        // Simula envio bem-sucedido: limpa o form e mostra mensagem temporária
+
         this.submitted = true
         this.form = { nome: '', email: '', carro: '', mensagem: '', newsletter: false }
         setTimeout(() => (this.submitted = false), 4000)
@@ -48,20 +42,8 @@ export default {
 
 <template>
 
-    <!--
-      Observações de refactor:
-      - Removi tags <body> e links estáticos para páginas HTML (index.html, leo.html, etc.)
-        porque esta é uma SPA com Vue Router; usar links estáticos causaria reloads
-        e perderia o estado da aplicação.
-      - Uso `Header`/`Footer` componentes para manter layout consistente entre views
-        e para centralizar alterações de navegação (router-link).
-      - A galeria foi movida para um componente `Gallery` reutilizável para evitar
-        duplicação de código entre as páginas e permitir busca/filtro reativos.
-    -->
-
     <Header />
 
-        <!--HERO-->
         <section class="hero hero-luxo" id="hero">
             <div class="hero-content">
                 <p class="hero-subtitulo">Sofisticação sem limites</p>
@@ -103,7 +85,6 @@ export default {
           <Gallery :items="items" />
         </section>
 
-        <!--Formulario com v-model e validação simples -->
         <section class="contato" id="contato">
           <div class="container">
             <div class="contato-grid">

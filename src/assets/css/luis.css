@@ -195,11 +195,180 @@
     font-size: 0.8rem;
 }
 
+/* ========================================
+   SEÇÃO DE CONTATO E FORMULÁRIO
+   ======================================== */
+
+.contato {
+    padding: 80px 0;
+    background: var(--preto-fosco);
+    border-top: 1px solid #1a1a1a;
+}
+
+.contato-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.contato-info { 
+    padding-top: 8px; 
+}
+
+.contato-info p { 
+    margin: 16px 0 24px; 
+    color: #ccc;
+}
+
+.contato-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contato-lista li { 
+    font-size: .95rem; 
+    color: #ccc;
+}
+
+/* Formulário */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-grupo label {
+    font-size: .85rem;
+    color: var(--branco);
+    font-weight: 700;
+}
+
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
+    background: var(--preto-card);
+    border: 2px solid #333;
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: var(--branco);
+    font-family: 'Roboto', sans-serif;
+    font-size: .95rem;
+    transition: all 0.3s ease;
+}
+
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+    outline: none;
+    border-color: var(--vermelho);
+    box-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
+}
+
+.form-grupo input::placeholder,
+.form-grupo textarea::placeholder { 
+    color: #666; 
+}
+
+/* Checkbox */
+.form-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-check input { 
+    width: 16px; 
+    height: 16px; 
+    cursor: pointer; 
+}
+
+.form-check label { 
+    font-weight: 400; 
+    font-size: .9rem; 
+    cursor: pointer; 
+    color: #ccc;
+}
+
+/* Botão de envio */
+.btn-gold {
+    background: var(--vermelho);
+    color: var(--branco);
+    padding: 14px 28px;
+    border: 2px solid var(--vermelho);
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: .95rem;
+    cursor: pointer;
+    transition: var(--transicao);
+}
+
+.btn-gold:hover { 
+    background: #c42e39; 
+    border-color: #c42e39;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
+}
+
+.btn-full { 
+    width: 100%; 
+    text-align: center; 
+    display: block; 
+}
+
+/* Mensagens de validação e sucesso */
+.erro {
+    color: #ff6b6b;
+    font-size: .8rem;
+    margin-top: -4px;
+    font-weight: 600;
+}
+
+.sucesso {
+    color: #51cf66;
+    background: rgba(81, 207, 102, 0.1);
+    border: 1px solid rgba(81, 207, 102, 0.3);
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 8px;
+    animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
 @media (max-width: 768px) {
     .sobre-flex {
         flex-direction: column;
         text-align: center;
     }
+    
+    .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
     .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
