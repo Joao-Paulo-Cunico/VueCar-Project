@@ -1,18 +1,27 @@
 <script>
 import '../assets/css/leo.css'
+import Header from '../components/header.vue'
+import Footer from '../components/footer.vue'
+import Gallery from '../components/Gallery.vue'
+
+const items = [
+    { id: 1, title: 'VW Fusca', year: '1959', tag: 'Ícone', desc: 'Fusca nacional clássico', image: '/src/assets/img_leo/fusca.jpg' },
+    { id: 2, title: 'Chevrolet Opala', year: '1968', tag: 'Clássico', desc: 'Opala de 1968', image: '/src/assets/img_leo/opala.jpg' },
+    { id: 3, title: 'Ford Maverick', year: '1973', tag: 'Muscle', desc: 'Maverick 1973', image: '/src/assets/img_leo/maverick.jpg' }
+]
+
+export default {
+    components: { Header, Footer, Gallery },
+    data() {
+        return { items }
+    }
+}
 </script>
 
 <template>
 
-    <header class="navbar">
-        <router-link to="/" class="logo">Evo<span>Car</span></router-link>
-        <nav>
-            <router-link to="/">← Início</router-link>
-            <a href="#hero">Sobre</a>
-            <a href="#galeria">Galeria</a>
-            <a href="#contato">Contato</a>
-        </nav>
-    </header>
+    <!-- Usamos o componente Header para manter layout consistente -->
+    <Header />
 
     <section class="hero hero-classico" id="hero">
         <div class="hero-content">
@@ -179,24 +188,9 @@ import '../assets/css/leo.css'
 
 
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-colunas">
-                <div>
-                    <router-link to="/" class="logo">Evo<span>Car</span></router-link>
-                    <p>Página de Léo — Carros Clássicos.</p>
-                </div>
-                <div>
-                    <h4>Outras Páginas</h4>
-                    <ul>
-                        <li><router-link to="/">← Início</router-link></li>
-                        <li><router-link to="/esportivos">Esportivos — Ligeiro</router-link></li>
-                        <li><router-link to="/luxo">Luxo — João</router-link></li>
-                    </ul>
-                </div>
-            </div>
-            <p class="footer-base">&copy; 2025 EvoCar — Léo | Engenharia de Software — 3° Período</p>
-        </div>
-    </footer>
+  <!-- Reaproveitamos o componente Gallery passando os itens via prop -->
+  <Gallery :items="items" />
+
+  <Footer />
 
 </template>

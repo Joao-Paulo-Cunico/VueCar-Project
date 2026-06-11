@@ -1,21 +1,65 @@
 <script>
 import '../assets/css/joao.css'
+import Header from '../components/header.vue'
+import Footer from '../components/footer.vue'
+import Gallery from '../components/Gallery.vue'
+
+// Lista de itens da galeria como exemplo. Mantive este array localmente para
+// mostrar como o `Gallery` consome dados via `props`. Em produção, isso
+// pode vir de uma API ou de um store centralizado.
+const items = [
+  { id: 1, title: 'Rolls-Royce Phantom', year: '1925', tag: 'Luxo', desc: 'Rolls-Royce Phantom', image: '/src/assets/img_luxo/img_luxo1.webp' },
+  { id: 2, title: 'Bentley Continental GT', year: '2003', tag: 'GT', desc: 'Bentley Continental GT', image: '/src/assets/img_luxo/img_luxo2.jfif' },
+  { id: 3, title: 'Mercedes Classe S', year: '1972', tag: 'Luxo', desc: 'Mercedes Classe S', image: '/src/assets/img_luxo/img_luxo3.jpg' }
+]
+
+export default {
+  components: { Header, Footer, Gallery },
+  data() {
+    return {
+      items,
+      // Estrutura do formulário convertida para `v-model`:
+      // - mais fácil de validar e limpar após envio
+      form: { nome: '', email: '', carro: '', mensagem: '', newsletter: false },
+      formErrors: {},
+      submitted: false
+    }
+  },
+  methods: {
+    // submitForm: validação simples no cliente. Substitui o uso de `action`/`method`
+    // que antes causaria reload da página (não desejável em SPA).
+    submitForm(e) {
+      e.preventDefault()
+      this.formErrors = {}
+      if (!this.form.nome) this.formErrors.nome = 'Nome é obrigatório.'
+      if (!this.form.email) this.formErrors.email = 'Email é obrigatório.'
+      if (!this.form.mensagem) this.formErrors.mensagem = 'Mensagem é obrigatória.'
+      if (Object.keys(this.formErrors).length === 0) {
+        // Simula envio bem-sucedido: limpa o form e mostra mensagem temporária
+        this.submitted = true
+        this.form = { nome: '', email: '', carro: '', mensagem: '', newsletter: false }
+        setTimeout(() => (this.submitted = false), 4000)
+      }
+    }
+  }
+}
 </script>
 
 
 <template>
 
-    <body>
-        <!--NAVBAR-->
-        <header class="navbar">
-            <router-link to="/" class="logo">Evo<span>Car</span></router-link>
-            <nav>
-                <router-link to="/">← Início</router-link>
-                <a href="#hero">Sobre</a>
-                <a href="#galeria">Galeria</a>
-                <a href="#contato">Contato</a>
-            </nav>
-        </header>
+    <!--
+      Observações de refactor:
+      - Removi tags <body> e links estáticos para páginas HTML (index.html, leo.html, etc.)
+        porque esta é uma SPA com Vue Router; usar links estáticos causaria reloads
+        e perderia o estado da aplicação.
+      - Uso `Header`/`Footer` componentes para manter layout consistente entre views
+        e para centralizar alterações de navegação (router-link).
+      - A galeria foi movida para um componente `Gallery` reutilizável para evitar
+        duplicação de código entre as páginas e permitir busca/filtro reativos.
+    -->
+
+    <Header />
 
         <!--HERO-->
         <section class="hero hero-luxo" id="hero">
@@ -54,132 +98,67 @@ import '../assets/css/joao.css'
             </div>
         </section>
 
-        <!--Galeria-->
+        <!--Galeria: componente reutilizável -->
         <section class="galeria secao-escura" id="galeria">
-            <div class="container">
-                <div class="secao-header">
-                    <span class="tag tag-gold">Galeria</span>
-                    <h2 class="titulo-secao">Obras-Primas <span class="texto-gold">Automotivas</span></h2>
-                    <p class="subtitulo-secao">Os veículos que definem o padrão máximo de luxo e exclusividade.</p>
-                </div>
-
-                <!-- Grid Layout: 3 colunas -->
-                <div class="cards-grid">
-
-                    <div class="card card-gold">
-                        <div class="card-img-wrap">
-                            <img src="../assets/img_luxo/img_luxo1.webp" alt="Rolls-Royce Phantom">
-                            <div class="card-overlay"><span>O padrão máximo em automóveis</span></div>
-                        </div>
-                        <div class="card-corpo">
-                            <span class="card-ano card-ano-gold">1925</span>
-                            <h3>Rolls-Royce Phantom</h3>
-                            <p>O cume do luxo automotivo. Cada unidade é praticamente artesanal, feita sob encomenda.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card card-gold">
-                        <div class="card-img-wrap">
-                            <img src="../assets/img_luxo/img_luxo2.jfif" alt="Bentley Continental GT">
-                            <div class="card-overlay"><span>Grand Tourer britânico por excelência</span></div>
-                        </div>
-                        <div class="card-corpo">
-                            <span class="card-ano card-ano-gold">2003</span>
-                            <h3>Bentley Continental GT</h3>
-                            <p>Performance extraordinária aliada ao luxo artesanal britânico de mais de um século.</p>
-                        </div>
-                    </div>
-
-                    <div class="card card-gold">
-                        <div class="card-img-wrap">
-                            <img src="../assets/img_luxo/img_luxo3.jpg" alt="Mercedes-Benz S-Class">
-                            <div class="card-overlay"><span>A referência mundial em sedans de luxo</span></div>
-                        </div>
-                        <div class="card-corpo">
-                            <span class="card-ano card-ano-gold">1972</span>
-                            <h3>Mercedes-Benz Classe S</h3>
-                            <p>Por décadas definindo o teto de conforto, tecnologia e segurança na indústria automotiva.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+          <Gallery :items="items" />
         </section>
 
-        <!--Formulario-->
+        <!--Formulario com v-model e validação simples -->
         <section class="contato" id="contato">
-            <div class="container">
-                <div class="contato-grid">
+          <div class="container">
+            <div class="contato-grid">
 
-                    <div class="contato-info">
-                        <span class="tag tag-gold">Contato</span>
-                        <h2 class="titulo-secao">Fale com <span class="texto-gold">João</span></h2>
-                        <p>Aprecia o refinamento e a exclusividade? Entre em contato!</p>
-                        <ul class="contato-lista">
-                            <li>👑 Tema: Carros de Luxo</li>
-                            <li>👤 Responsável: João</li>
-                            <li>📚 Engenharia de Software — 3° Período</li>
-                        </ul>
-                    </div>
+              <div class="contato-info">
+                <span class="tag tag-gold">Contato</span>
+                <h2 class="titulo-secao">Fale com <span class="texto-gold">João</span></h2>
+                <p>Aprecia o refinamento e a exclusividade? Entre em contato!</p>
+                <ul class="contato-lista">
+                  <li>👑 Tema: Carros de Luxo</li>
+                  <li>👤 Responsável: João</li>
+                  <li>📚 Engenharia de Software — 3° Período</li>
+                </ul>
+              </div>
 
-                    <form class="form" action="#" method="get">
-                        <div class="form-grupo">
-                            <label for="nome">Nome *</label>
-                            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-                        </div>
-                        <div class="form-grupo">
-                            <label for="email">E-mail *</label>
-                            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
-                        </div>
-                        <div class="form-grupo">
-                            <label for="carro-favorito">Carro de Luxo Favorito</label>
-                            <select id="carro-favorito" name="carro-favorito">
-                                <option value="">Selecione...</option>
-                                <option value="rolls-royce">Rolls-Royce Phantom</option>
-                                <option value="bentley">Bentley Continental GT</option>
-                                <option value="mercedes-s">Mercedes Classe S</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-grupo">
-                            <label for="mensagem">Mensagem *</label>
-                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Sua mensagem..."
-                                required></textarea>
-                        </div>
-                        <div class="form-grupo form-check">
-                            <input type="checkbox" id="newsletter" name="newsletter">
-                            <label for="newsletter">Quero receber novidades sobre carros de luxo</label>
-                        </div>
-                        <button type="submit" class="btn btn-gold btn-full">Enviar</button>
-                    </form>
-
+              <form class="form" @submit.prevent="submitForm">
+                <div class="form-grupo">
+                  <label for="nome">Nome *</label>
+                  <input v-model="form.nome" type="text" id="nome" placeholder="Seu nome" />
+                  <div v-if="formErrors.nome" class="erro">{{ formErrors.nome }}</div>
                 </div>
+                <div class="form-grupo">
+                  <label for="email">E-mail *</label>
+                  <input v-model="form.email" type="email" id="email" placeholder="seu@email.com" />
+                  <div v-if="formErrors.email" class="erro">{{ formErrors.email }}</div>
+                </div>
+                <div class="form-grupo">
+                  <label for="carro-favorito">Carro de Luxo Favorito</label>
+                  <select v-model="form.carro" id="carro-favorito">
+                    <option value="">Selecione...</option>
+                    <option value="rolls-royce">Rolls-Royce Phantom</option>
+                    <option value="bentley">Bentley Continental GT</option>
+                    <option value="mercedes-s">Mercedes Classe S</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+                <div class="form-grupo">
+                  <label for="mensagem">Mensagem *</label>
+                  <textarea v-model="form.mensagem" id="mensagem" rows="4" placeholder="Sua mensagem..."></textarea>
+                  <div v-if="formErrors.mensagem" class="erro">{{ formErrors.mensagem }}</div>
+                </div>
+                <div class="form-grupo form-check">
+                  <input v-model="form.newsletter" type="checkbox" id="newsletter" />
+                  <label for="newsletter">Quero receber novidades sobre carros de luxo</label>
+                </div>
+                <button type="submit" class="btn btn-gold btn-full">Enviar</button>
+
+                <div v-if="submitted" class="sucesso">Mensagem enviada com sucesso!</div>
+              </form>
+
             </div>
+          </div>
         </section>
 
-
-        <!--Footer-->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-colunas">
-                    <div>
-                        <router-link to="/" class="logo">Evo<span>Car</span></router-link>
-                        <p>Página de João — Carros de Luxo.</p>
-                    </div>
-                    <div>
-                        <h4>Outras Páginas</h4>
-                        <ul>
-                            <li><router-link to="/">← Início</router-link></li>
-                            <li><router-link to="/classicos">Clássicos — Léo</router-link></li>
-                            <li><router-link to="/esportivos">Esportivos — Ligeiro</router-link></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="footer-base">&copy; 2025 EvoCar — João | Engenharia de Software — 3° Período</p>
-            </div>
-        </footer>
-    </body>
+        <!-- Footer componente -->
+        <Footer />
 
 </template>

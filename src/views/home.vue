@@ -1,21 +1,14 @@
 <script setup>
-import Header from '../components/Header.vue'
-import Footer from '../components/Footer.vue'
+import Header from '../components/header.vue'
+import Footer from '../components/footer.vue'
 import '../assets/css/style.css'
 </script>
 
 
 <template>
 
-    <header class="navbar">
-        <a href="./home.vue" class="logo">Evo<span>Car</span></a>
-        <nav>
-            <a href="#hero">Início</a>
-            <a href="#timeline">História</a>
-            <a href="#equipe">Equipe</a>
-            <a href="#contato">Contato</a>
-        </nav>
-    </header>
+    <!-- Header componente reutilizável -->
+    <Header />
 
     <section class="hero" id="hero">
         <div class="hero-content">
@@ -169,33 +162,8 @@ import '../assets/css/style.css'
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-colunas">
-                <div>
-                    <a href="index.html" class="logo">Evo<span>Car</span></a>
-                    <p>Projeto acadêmico sobre a evolução dos automóveis ao longo do tempo.</p>
-                </div>
-                <div>
-                    <h4>Páginas</h4>
-                    <ul>
-                        <li><a href="leo.html">Clássicos — Léo</a></li>
-                        <li><a href="luis.html">Esportivos — Ligeiro</a></li>
-                        <li><a href="joao.html">Luxo — João</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Equipe</h4>
-                    <ul>
-                        <li>Léo</li>
-                        <li>Ligeiro</li>
-                        <li>João</li>
-                    </ul>
-                </div>
-            </div>
-            <p class="footer-base">&copy; 2025 EvoCar — Projeto Acadêmico | Engenharia de Software — 3° Período</p>
-        </div>
-    </footer>
+    <!-- Footer componente reutilizável -->
+    <Footer />
 
 
 </template>

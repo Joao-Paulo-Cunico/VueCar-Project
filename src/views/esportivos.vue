@@ -1,19 +1,25 @@
 <script>
 import '../assets/css/luis.css'
+import Header from '../components/header.vue'
+import Footer from '../components/footer.vue'
+import Gallery from '../components/Gallery.vue'
+
+const items = [
+    { id: 1, title: 'McLaren P1', year: '2013', tag: 'Híbrido', desc: 'McLaren P1 amarela', image: '/src/assets/img/McLaren.jpg' },
+    { id: 2, title: 'Ferrari F8', year: '2019', tag: 'V8', desc: 'Ferrari F8 Tributo', image: '/src/assets/img/ferrari.jpg' },
+    { id: 3, title: 'Porsche 911 GT3 RS', year: '2022', tag: 'Pista', desc: 'Porsche 911 GT3 RS', image: '/src/assets/img/porsche.jpg' }
+]
+
+export default {
+    components: { Header, Footer, Gallery },
+    data() { return { items } }
+}
 </script>
 
 
 <template>
 
-    <header class="navbar">
-        <router-link to="/" class="logo">Evo<span>Car</span></router-link>
-        <nav>
-            <router-link to="/">← Início</router-link>
-            <a href="#sobre">Sobre</a>
-            <a href="#galeria">Galeria</a>
-            <a href="#contato">Contato</a>
-        </nav>
-    </header>
+    <Header />
 
     <main>
         <section class="hero hero-esportivo" id="hero">
@@ -47,89 +53,11 @@ import '../assets/css/luis.css'
         </section>
 
         <section class="galeria" id="galeria">
-            <div class="container">
-                <div class="secao-header">
-                    <span class="tag tag-gold">Galeria de Elite</span>
-                    <h2 class="titulo-secao">Lendas do <span>Asfalto</span></h2>
-                    <p class="subtitulo-secao">Os veículos que definem o padrão máximo de performance e agressividade.
-                    </p>
-                </div>
-
-                <div class="cards-grid">
-                    <article class="card">
-                        <div class="card-img-wrap">
-                            <img src="../assets/img/McLaren.jpg" alt="McLaren P1 amarela">
-                        </div>
-                        <div class="card-corpo">
-                            <p class="card-topo">O cume da performance híbrida</p>
-                            <span class="card-meta">2013</span>
-                            <h3>McLaren P1</h3>
-                            <p class="card-desc">A McLaren redefine o que um supercarro pode fazer utilizando tecnologia
-                                pura de F1.</p>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-img-wrap">
-                            <img src="../assets/img/ferrari.jpg" alt="Ferrari F8 Tributo vermelha">
-                        </div>
-                        <div class="card-corpo">
-                            <p class="card-topo">Uma homenagem ao lendário motor V8</p>
-                            <span class="card-meta">2019</span>
-                            <h3>Ferrari F8 Tributo</h3>
-                            <p class="card-desc">Performance extraordinária aliada à paixão italiana em cada detalhe
-                                aerodinâmico.</p>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-img-wrap">
-                            <img src="../assets/img/porsche.jpg" alt="Porsche 911 GT3 RS">
-                        </div>
-                        <div class="card-corpo">
-                            <p class="card-topo">O rei absoluto de Nürburgring</p>
-                            <span class="card-meta">2022</span>
-                            <h3>Porsche 911 GT3 RS</h3>
-                            <p class="card-desc">Aerodinâmica de pista e o motor aspirado mais cultuado do mundo em um
-                                carro de rua.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
+          <!-- usamos o componente Gallery para mostrar os itens e permitir busca/filtro -->
+          <Gallery :items="items" />
         </section>
 
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-info">
-                        <router-link to="/" class="logo">Evo<span>Car</span></router-link>
-                        <p>Onde a performance encontra a engenharia. Explore a elite dos supercarros mundiais.</p>
-                        <p class="autor-info">Desenvolvido por <strong>Luis Molon</strong></p>
-                    </div>
-
-                    <div class="footer-nav">
-                        <h4>Navegação</h4>
-                        <ul>
-                            <li><router-link to="/">← Início</router-link></li>
-                            <li><a href="#sobre">Sobre a Categoria</a></li>
-                            <li><a href="#galeria">Galeria de Elite</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-paginas">
-                        <h4>Outros Projetos</h4>
-                        <ul>
-                            <li><router-link to="/classicos">Clássicos — Léo</router-link></li>
-                            <li><router-link to="/luxo">Luxo — João</router-link></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="footer-base">
-                    <p>&copy; 2026 EvoCar — Luis</p>
-                </div>
-            </div>
-        </footer>
+        <Footer />
     </main>
 
 </template>
